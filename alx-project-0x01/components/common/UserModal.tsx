@@ -26,12 +26,24 @@ const UserModal: React.FC<UserModalProps> = ({ onClose, onSubmit }) => {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  const { name, value } = e.target;
+
+  if (name.includes(".")) {
+    const [parent, child] = name.split(".");
     setUser((prevUser) => ({
       ...prevUser,
-      [name]: value
+      [parent]: {
+        ...prevUser[parent as keyof typeof prevUser],
+        [child]: value,
+      },
     }));
-  };
+  } else {
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: value,
+    }));
+  }
+};
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
