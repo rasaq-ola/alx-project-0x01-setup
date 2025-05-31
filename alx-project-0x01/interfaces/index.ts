@@ -44,7 +44,7 @@ export interface PostModalProps {
 // interfaces/index.ts
 
 export interface UserData {
-  id?: number;
+  id: number;
   name: string;
   username: string;
   email: string;
